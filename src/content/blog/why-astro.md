@@ -1,15 +1,21 @@
 ---
-title: "Why I Rebuilt My Blog with Astro"
-description: "After years of React-based blogs, I switched to Astro. Zero JavaScript by default changed everything."
-date: 2026-02-05
-tags: ["astro", "web", "performance"]
+title: Why I Rebuilt My Blog with Astro
+description: After years of React-based blogs, I switched to Astro. Zero JavaScript by default changed everything.
+date: "2026-02-05T00:00:00.000Z"
+tags:
+  - astro
+  - web
+  - performance
+draft: false
 ---
 
-I've rebuilt this blog more times than I'd like to admit. React Router, Next.js, Remix — I've tried them all. But Astro finally feels like the right tool for a content site.
+I've rebuilt this blog more times than I'd like to admit. React Router, Next.js, Remix â I've tried them all. But Astro finally feels like the right tool for a content site.
+
+> Hello
 
 ## The Problem with React Blogs
 
-Don't get me wrong — React is fantastic for applications. But for a blog? You're shipping a JavaScript runtime so users can read static text. That's like driving a forklift to the corner store.
+Don't get me wrong â React is fantastic for applications. But for a blog? You're shipping a JavaScript runtime so users can read static text. That's like driving a forklift to the corner store.
 
 Every React blog I built had the same issues:
 
@@ -41,4 +47,4 @@ The content collections API is exactly what I wanted. Type-safe frontmatter, Zod
 
 This blog loads in under 200ms on a 3G connection. There's no JavaScript bundle to parse. No hydration to wait for. Just HTML and CSS, delivered from the edge.
 
-Sometimes the best technology choice is the one that does less.
+Sometimes the best technology choice is the one that does less asdf
