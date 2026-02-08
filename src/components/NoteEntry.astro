@@ -1,0 +1,113 @@
+---
+interface Props {
+  title: string;
+  description?: string;
+  date: Date;
+  id: string;
+}
+
+const { title, description, date, id } = Astro.props;
+
+const formattedDate = date.toLocaleDateString("en-US", {
+  year: "numeric",
+  month: "short",
+  day: "numeric",
+});
+---
+
+<a href={`/notes/${id}`} class="note-entry">
+  <time class="note-date">{formattedDate}</time>
+  <div class="note-content">
+    <span class="note-title">{title}</span>
+    {description && <span class="note-desc">{description}</span>}
+  </div>
+  <svg class="note-arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <polyline points="9 18 15 12 9 6"/>
+  </svg>
+</a>
+
+<style>
+  .note-entry {
+    display: flex;
+    align-items: baseline;
+    gap: 1.25rem;
+    padding: 0.75rem 0;
+    border-bottom: 1px solid var(--color-border);
+    text-decoration: none;
+    color: inherit;
+    transition: background 0.2s ease;
+    border-radius: 4px;
+  }
+
+  .note-entry:last-child,
+  .note-entry:last-of-type {
+    border-bottom: none;
+  }
+
+  .note-entry:hover {
+    background: rgba(22, 27, 34, 0.5);
+  }
+
+  .note-date {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: var(--color-amber);
+    letter-spacing: 0.02em;
+    flex-shrink: 0;
+    min-width: 90px;
+  }
+
+  .note-content {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+    min-width: 0;
+    flex: 1;
+  }
+
+  .note-title {
+    font-size: 0.95rem;
+    color: var(--color-text);
+    transition: color 0.2s ease;
+  }
+
+  .note-entry:hover .note-title {
+    color: var(--color-accent-bright);
+  }
+
+  .note-desc {
+    font-size: 0.85rem;
+    color: var(--color-text-muted);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .note-arrow {
+    flex-shrink: 0;
+    color: var(--color-text-muted);
+    transition: transform 0.2s ease, color 0.2s ease;
+    align-self: center;
+  }
+
+  .note-entry:hover .note-arrow {
+    color: var(--color-accent);
+    transform: translateX(2px);
+  }
+
+  @media (max-width: 480px) {
+    .note-entry {
+      flex-direction: column;
+      gap: 0.25rem;
+      position: relative;
+    }
+    .note-date {
+      min-width: unset;
+    }
+    .note-arrow {
+      position: absolute;
+      right: 0;
+      top: 0.75rem;
+    }
+  }
+</style>

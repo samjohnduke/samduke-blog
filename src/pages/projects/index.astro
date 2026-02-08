@@ -1,0 +1,60 @@
+---
+import Base from "../../layouts/Base.astro";
+import ProjectCard from "../../components/ProjectCard.astro";
+import { getCollection } from "astro:content";
+
+const projects = (await getCollection("projects"))
+  .sort((a, b) => a.data.order - b.data.order);
+---
+
+<Base title="Projects" description="Things I've built and am building.">
+  <div class="page">
+    <header class="page-header animate-fade-in-up">
+      <h1 class="page-title">Projects</h1>
+      <p class="page-desc">Things I've built and am building.</p>
+    </header>
+    <div class="projects-grid">
+      {projects.map((project, i) => (
+        <div class="animate-fade-in-up" style={`animation-delay: ${0.05 * (i + 1)}s;`}>
+          <ProjectCard
+            title={project.data.title}
+            description={project.data.description}
+            tags={project.data.tags}
+            slug={project.id}
+          />
+        </div>
+      ))}
+    </div>
+  </div>
+</Base>
+
+<style>
+  .page {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 7rem 1.5rem 4rem;
+  }
+
+  .page-header {
+    margin-bottom: 2.5rem;
+  }
+
+  .page-title {
+    font-family: var(--font-display);
+    font-size: clamp(2rem, 5vw, 2.8rem);
+    font-weight: 700;
+    margin: 0 0 0.5rem;
+  }
+
+  .page-desc {
+    font-size: 1rem;
+    color: var(--color-text-secondary);
+    margin: 0;
+  }
+
+  .projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1rem;
+  }
+</style>

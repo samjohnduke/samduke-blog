@@ -1,0 +1,168 @@
+---
+import Base from "../../layouts/Base.astro";
+import NoteEntry from "../../components/NoteEntry.astro";
+import { getCollection } from "astro:content";
+
+const notes = (await getCollection("notes"))
+  .sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
+---
+
+<Base title="Notes" description="Quick notes, TILs, and things I've picked up along the way.">
+  <div class="page">
+    <header class="page-header animate-fade-in-up">
+      <h1 class="page-title">Notes</h1>
+      <p class="page-desc">Quick notes, TILs, and things I've picked up along the way.</p>
+    </header>
+
+    <div class="notes-filter animate-fade-in-up" style="animation-delay: 0.05s;">
+      <svg class="filter-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="11" cy="11" r="8"/>
+        <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+      </svg>
+      <input
+        type="text"
+        class="filter-input"
+        id="notes-filter"
+        placeholder="filter notes..."
+        autocomplete="off"
+        spellcheck="false"
+      />
+      <span class="filter-count" id="filter-count">{notes.length} notes</span>
+    </div>
+
+    <div class="notes-list animate-fade-in-up" id="notes-list" style="animation-delay: 0.1s;">
+      {notes.map((note) => (
+        <NoteEntry
+          title={note.data.title}
+          description={note.data.description}
+          date={note.data.date}
+          id={note.id}
+        />
+      ))}
+      <div class="notes-empty" id="notes-empty">no matching notes</div>
+    </div>
+  </div>
+</Base>
+
+<style>
+  .page {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 7rem 1.5rem 4rem;
+  }
+
+  .page-header {
+    margin-bottom: 2.5rem;
+  }
+
+  .page-title {
+    font-family: var(--font-display);
+    font-size: clamp(2rem, 5vw, 2.8rem);
+    font-weight: 700;
+    margin: 0 0 0.5rem;
+  }
+
+  .page-desc {
+    font-size: 1rem;
+    color: var(--color-text-secondary);
+    margin: 0;
+  }
+
+  .notes-filter {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.65rem 1rem;
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: 6px;
+    margin-bottom: 0.75rem;
+    transition: border-color 0.2s ease;
+  }
+
+  .notes-filter:focus-within {
+    border-color: var(--color-accent);
+    box-shadow: 0 0 12px var(--color-accent-glow);
+  }
+
+  .filter-icon {
+    flex-shrink: 0;
+    color: var(--color-text-muted);
+  }
+
+  .notes-filter:focus-within .filter-icon {
+    color: var(--color-accent);
+  }
+
+  .filter-input {
+    flex: 1;
+    background: none;
+    border: none;
+    outline: none;
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    color: var(--color-text);
+    letter-spacing: 0.01em;
+  }
+
+  .filter-input::placeholder {
+    color: var(--color-text-muted);
+  }
+
+  .filter-count {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    color: var(--color-text-muted);
+    flex-shrink: 0;
+    letter-spacing: 0.02em;
+  }
+
+  .notes-list {
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: 6px;
+    padding: 0.5rem 1.25rem;
+  }
+
+  .notes-list :global(.note-entry:last-of-type) {
+    border-bottom: none;
+  }
+
+  .notes-empty {
+    display: none;
+    padding: 1.5rem 0;
+    text-align: center;
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    color: var(--color-text-muted);
+  }
+</style>
+
+<script>
+  const input = document.getElementById("notes-filter") as HTMLInputElement;
+  const list = document.getElementById("notes-list")!;
+  const count = document.getElementById("filter-count")!;
+  const emptyMsg = document.getElementById("notes-empty")!;
+  const entries = list.querySelectorAll<HTMLElement>(".note-entry");
+  const total = entries.length;
+
+  input?.addEventListener("input", () => {
+    const query = input.value.toLowerCase().trim();
+    let visible = 0;
+
+    entries.forEach((entry) => {
+      const title = entry.querySelector(".note-title")?.textContent?.toLowerCase() ?? "";
+      const desc = entry.querySelector(".note-desc")?.textContent?.toLowerCase() ?? "";
+
+      const match = !query || title.includes(query) || desc.includes(query);
+      entry.style.display = match ? "" : "none";
+      if (match) visible++;
+    });
+
+    count.textContent = query
+      ? `${visible} / ${total} notes`
+      : `${total} notes`;
+
+    emptyMsg.style.display = visible === 0 ? "block" : "none";
+  });
+</script>

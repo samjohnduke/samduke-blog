@@ -1,0 +1,299 @@
+---
+const pathname = Astro.url.pathname;
+const links = [
+  { href: "/blog", label: "blog" },
+  { href: "/projects", label: "projects" },
+  { href: "/notes", label: "notes" },
+];
+---
+
+<nav class="nav" id="main-nav">
+  <div class="nav-inner">
+    <a href="/" class="nav-logo">SAM DUKE</a>
+    <div class="nav-right">
+      <div class="nav-links">
+        {links.map((link) => (
+          <a
+            href={link.href}
+            class:list={["nav-link", { active: pathname.startsWith(link.href) }]}
+          >
+            {link.label}
+          </a>
+        ))}
+      </div>
+      <button class="search-trigger" id="search-trigger-nav" aria-label="Search (Cmd+K)">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="11" cy="11" r="8"/>
+          <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+        </svg>
+        <span class="search-shortcut">
+          <kbd>⌘</kbd><kbd>K</kbd>
+        </span>
+      </button>
+    </div>
+    <button class="nav-toggle" id="nav-toggle" aria-label="Toggle menu">
+      <span class="toggle-bar"></span>
+      <span class="toggle-bar"></span>
+    </button>
+  </div>
+</nav>
+
+<div class="mobile-menu" id="mobile-menu">
+  <div class="mobile-menu-inner">
+    {links.map((link) => (
+      <a
+        href={link.href}
+        class:list={["mobile-link", { active: pathname.startsWith(link.href) }]}
+      >
+        {link.label}
+      </a>
+    ))}
+  </div>
+</div>
+
+<style>
+  .nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+    background: rgba(15, 17, 23, 0.8);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border-bottom: 1px solid var(--color-border);
+    box-shadow: 0 1px 12px var(--color-accent-glow);
+    transition: transform 0.3s ease;
+  }
+
+  .nav.hidden {
+    transform: translateY(-100%);
+  }
+
+  .nav-inner {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+    height: 64px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .nav-logo {
+    font-family: var(--font-mono);
+    font-size: 0.95rem;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    color: var(--color-text);
+    text-decoration: none;
+    transition: opacity 0.2s ease;
+  }
+  .nav-logo:hover {
+    opacity: 0.8;
+    color: var(--color-text);
+  }
+
+  .nav-right {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 2rem;
+  }
+
+  .nav-link {
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    color: var(--color-text-secondary);
+    text-decoration: none;
+    position: relative;
+    padding-bottom: 4px;
+    transition: color 0.2s ease;
+    text-transform: lowercase;
+  }
+
+  .nav-link::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: var(--color-amber);
+    transition: width 0.25s ease;
+  }
+
+  .nav-link:hover {
+    color: var(--color-amber);
+  }
+  .nav-link:hover::after {
+    width: 100%;
+  }
+
+  .nav-link.active {
+    color: var(--color-text);
+  }
+  .nav-link.active::after {
+    width: 100%;
+    background: var(--color-accent);
+  }
+
+  .nav-toggle {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    background: none;
+    border: 1px solid var(--color-border);
+    border-radius: 4px;
+    padding: 8px 10px;
+    cursor: pointer;
+    transition: border-color 0.2s ease;
+  }
+  .nav-toggle:hover {
+    border-color: var(--color-accent);
+  }
+
+  .toggle-bar {
+    display: block;
+    width: 18px;
+    height: 2px;
+    background: var(--color-text);
+    transition: transform 0.2s ease, opacity 0.2s ease;
+  }
+
+  .nav-toggle.open .toggle-bar:first-child {
+    transform: translateY(3.5px) rotate(45deg);
+  }
+  .nav-toggle.open .toggle-bar:last-child {
+    transform: translateY(-3.5px) rotate(-45deg);
+  }
+
+  .mobile-menu {
+    position: fixed;
+    top: 64px;
+    left: 0;
+    right: 0;
+    z-index: 99;
+    background: rgba(15, 17, 23, 0.95);
+    backdrop-filter: blur(16px);
+    border-bottom: 1px solid var(--color-border);
+    transform: translateY(-100%);
+    opacity: 0;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+    pointer-events: none;
+    display: none;
+  }
+
+  .mobile-menu.open {
+    transform: translateY(0);
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  .mobile-menu-inner {
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+
+  .mobile-link {
+    font-family: var(--font-mono);
+    font-size: 0.9rem;
+    letter-spacing: 0.08em;
+    color: var(--color-text-secondary);
+    text-decoration: none;
+    padding: 0.75rem 1rem;
+    border-radius: 6px;
+    transition: background 0.2s ease, color 0.2s ease;
+    text-transform: lowercase;
+  }
+  .mobile-link:hover {
+    background: var(--color-surface);
+    color: var(--color-amber);
+  }
+  .mobile-link.active {
+    color: var(--color-accent);
+    background: var(--color-surface);
+  }
+
+  .search-trigger {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: none;
+    border: 1px solid var(--color-border);
+    border-radius: 4px;
+    padding: 0.4rem 0.6rem;
+    cursor: pointer;
+    color: var(--color-text-muted);
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    transition: border-color 0.2s ease, color 0.2s ease;
+  }
+
+  .search-trigger:hover {
+    border-color: var(--color-accent);
+    color: var(--color-text-secondary);
+  }
+
+  .search-shortcut {
+    display: flex;
+    gap: 2px;
+  }
+
+  .search-shortcut kbd {
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    padding: 1px 4px;
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: 3px;
+    color: var(--color-text-muted);
+    line-height: 1.4;
+  }
+
+  @media (max-width: 640px) {
+    .nav-links {
+      display: none;
+    }
+    .nav-toggle {
+      display: flex;
+    }
+    .mobile-menu {
+      display: block;
+    }
+    .search-shortcut {
+      display: none;
+    }
+  }
+</style>
+
+<script>
+  // Scroll-aware nav hide/show
+  let lastScroll = 0;
+  const nav = document.getElementById("main-nav");
+  const toggle = document.getElementById("nav-toggle");
+  const menu = document.getElementById("mobile-menu");
+
+  window.addEventListener("scroll", () => {
+    const current = window.scrollY;
+    if (current > 80 && current > lastScroll) {
+      nav?.classList.add("hidden");
+    } else {
+      nav?.classList.remove("hidden");
+    }
+    lastScroll = current;
+  });
+
+  toggle?.addEventListener("click", () => {
+    toggle.classList.toggle("open");
+    menu?.classList.toggle("open");
+  });
+</script>

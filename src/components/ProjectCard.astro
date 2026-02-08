@@ -1,0 +1,154 @@
+---
+interface Props {
+  title: string;
+  description: string;
+  tags: string[];
+  slug: string;
+}
+
+const { title, description, tags, slug } = Astro.props;
+---
+
+<a href={`/projects/${slug}`} class="project-card">
+  <div class="project-inner">
+    <div class="project-header">
+      <svg class="project-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M22 19a2 2 0 01-2 2H4a2 2 0 01-2-2V5a2 2 0 012-2h5l2 3h9a2 2 0 012 2z"/>
+      </svg>
+      <svg class="project-link-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <polyline points="9 18 15 12 9 6"/>
+      </svg>
+    </div>
+    <h3 class="project-title">{title}</h3>
+    <p class="project-desc">{description}</p>
+    {tags.length > 0 && (
+      <div class="project-tags">
+        {tags.map((tag) => (
+          <span class="project-tag">{tag}</span>
+        ))}
+      </div>
+    )}
+  </div>
+</a>
+
+<style>
+  .project-card {
+    display: block;
+    position: relative;
+    background: transparent;
+    border: none;
+    text-decoration: none;
+    color: inherit;
+    transition: transform 0.25s ease, filter 0.25s ease;
+    height: 100%;
+  }
+
+  /* Border layer */
+  .project-card::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: var(--color-border);
+    clip-path: polygon(
+      0 0,
+      calc(100% - 10px) 0,
+      100% 10px,
+      100% 100%,
+      10px 100%,
+      0 calc(100% - 10px)
+    );
+    transition: background 0.25s ease;
+    z-index: 0;
+  }
+
+  /* Fill layer (inset to reveal border) */
+  .project-card::after {
+    content: "";
+    position: absolute;
+    inset: 1px;
+    background: var(--color-surface);
+    clip-path: polygon(
+      0 0,
+      calc(100% - 10px) 0,
+      100% 10px,
+      100% 100%,
+      10px 100%,
+      0 calc(100% - 10px)
+    );
+    z-index: 0;
+  }
+
+  .project-card:hover {
+    transform: translateY(-2px);
+  }
+
+  .project-card:hover::before {
+    background: var(--color-accent);
+  }
+
+  .project-inner {
+    position: relative;
+    z-index: 1;
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+  }
+
+  .project-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+  }
+
+  .project-icon {
+    color: var(--color-accent);
+  }
+
+  .project-link-icon {
+    color: var(--color-text-muted);
+    transition: color 0.2s ease, transform 0.2s ease;
+  }
+  .project-card:hover .project-link-icon {
+    color: var(--color-accent);
+    transform: translateX(2px);
+  }
+
+  .project-title {
+    font-family: var(--font-display);
+    font-size: 1.15rem;
+    font-weight: 600;
+    color: var(--color-text);
+    margin: 0 0 0.5rem;
+  }
+
+  .project-card:hover .project-title {
+    color: var(--color-accent-bright);
+  }
+
+  .project-desc {
+    font-size: 0.9rem;
+    color: var(--color-text-secondary);
+    margin: 0 0 1rem;
+    line-height: 1.5;
+    flex: 1;
+  }
+
+  .project-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    margin-top: auto;
+  }
+
+  .project-tag {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.03em;
+    padding: 0.2em 0.6em;
+    background: var(--color-amber-dim);
+    color: var(--color-amber);
+    border-radius: 3px;
+  }
+</style>

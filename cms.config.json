@@ -1,0 +1,38 @@
+{
+  "name": "Sam Duke Blog",
+  "collections": {
+    "blog": {
+      "label": "Blog Posts",
+      "directory": "src/content/blog",
+      "fields": [
+        { "name": "title", "type": "string", "required": true, "label": "Title" },
+        { "name": "description", "type": "string", "required": true, "label": "Description" },
+        { "name": "date", "type": "date", "required": true, "label": "Date" },
+        { "name": "tags", "type": "string[]", "label": "Tags" },
+        { "name": "draft", "type": "boolean", "default": false, "label": "Draft" }
+      ]
+    },
+    "notes": {
+      "label": "Notes",
+      "directory": "src/content/notes",
+      "fields": [
+        { "name": "title", "type": "string", "required": true, "label": "Title" },
+        { "name": "description", "type": "string", "label": "Description" },
+        { "name": "date", "type": "date", "required": true, "label": "Date" }
+      ]
+    },
+    "projects": {
+      "label": "Projects",
+      "directory": "src/content/projects",
+      "fields": [
+        { "name": "title", "type": "string", "required": true, "label": "Title" },
+        { "name": "description", "type": "string", "required": true, "label": "Description" },
+        { "name": "url", "type": "string", "label": "URL" },
+        { "name": "repo", "type": "string", "label": "Repository" },
+        { "name": "tags", "type": "string[]", "label": "Tags" },
+        { "name": "featured", "type": "boolean", "default": false, "label": "Featured" },
+        { "name": "order", "type": "number", "default": 0, "label": "Order" }
+      ]
+    }
+  }
+}
