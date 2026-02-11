@@ -1,8 +1,11 @@
 ---
-title: "Rust for Web Developers"
-description: "Coming from TypeScript, Rust felt alien. Here's what clicked and what I wish someone had told me earlier."
-date: 2026-01-28
-tags: ["rust", "typescript", "learning"]
+title: Rust for Web Developers
+description: Coming from TypeScript, Rust felt alien. Here's what clicked and what I wish someone had told me earlier.
+date: "2026-01-28T00:00:00.000Z"
+tags:
+  - rust
+  - typescript
+  - learning
 ---
 
 I've been writing TypeScript for years. Picking up Rust felt like learning to code all over again — in the best and worst ways.
@@ -39,3 +42,4 @@ I'm not replacing my TypeScript stack. But Rust is incredible for:
 - Anything that touches systems-level concerns
 
 > The best part about learning Rust isn't Rust itself — it's how it changes the way you think about code in every language.
+
