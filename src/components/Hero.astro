@@ -3,55 +3,30 @@
 ---
 
 <section class="hero">
-  <!-- Animated grid background -->
-  <div class="hero-grid"></div>
+  <!-- Main content -->
+  <div class="hero-main">
+    <div class="hero-brush" aria-hidden="true">
+      <svg width="60" height="6" viewBox="0 0 60 6" fill="none">
+        <path d="M0,3 Q15,0.5 30,3 Q45,5.5 60,3" stroke="currentColor" stroke-width="0.75" stroke-linecap="round"/>
+      </svg>
+    </div>
 
-  <!-- Horizontal scanlines -->
-  <div class="scanlines" aria-hidden="true"></div>
+    <h1 class="hero-name">
+      <span class="hero-first">Sam</span>
+      <span class="hero-last">Duke</span>
+    </h1>
 
-  <!-- Floating particles -->
-  <div class="particles" aria-hidden="true">
-    <span class="particle p1"></span>
-    <span class="particle p2"></span>
-    <span class="particle p3"></span>
-    <span class="particle p4"></span>
-    <span class="particle p5"></span>
-    <span class="particle p6"></span>
-    <span class="particle p7"></span>
-    <span class="particle p8"></span>
+    <p class="hero-tagline">
+      engineer — founder @ chameleon creator
+    </p>
+
+    <div class="hero-accent-line" aria-hidden="true"></div>
   </div>
 
-  <!-- Decorative corner brackets -->
-  <div class="corner corner-tl" aria-hidden="true"></div>
-  <div class="corner corner-tr" aria-hidden="true"></div>
-  <div class="corner corner-bl" aria-hidden="true"></div>
-  <div class="corner corner-br" aria-hidden="true"></div>
-
-  <!-- Gradient overlays -->
-  <div class="hero-vignette"></div>
-  <div class="hero-fade"></div>
-
-  <!-- Content -->
-  <div class="hero-content">
-    <div class="hero-label">
-      <span class="label-line"></span>
-      <span class="label-text">systems / web / edge</span>
-      <span class="label-line"></span>
-    </div>
-    <h1 class="hero-name">Sam Duke</h1>
-    <div class="hero-tagline-wrapper">
-      <p class="hero-tagline">
-        <span class="tagline-text">building on the edge &mdash; founder @ chameleon creator</span>
-        <span class="tagline-cursor animate-blink">|</span>
-      </p>
-    </div>
-    <div class="hero-actions">
-      <a href="/blog" class="hero-btn hero-btn-primary">
-        <span class="btn-arrow">&rarr;</span> read the blog
-      </a>
-      <a href="/projects" class="hero-btn hero-btn-secondary">
-        <span class="btn-arrow">&rarr;</span> view projects
-      </a>
+  <!-- Framed nature image — like a kakemono (hanging scroll painting) -->
+  <div class="hero-frame">
+    <div class="hero-frame-mat">
+      <img src="/hero-garden.jpg" alt="" class="hero-frame-img" loading="eager" />
     </div>
   </div>
 </section>
@@ -59,254 +34,191 @@
 <style>
   .hero {
     position: relative;
-    min-height: 70vh;
+    min-height: 92vh;
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: space-between;
+    gap: 4rem;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 6rem 4rem 4rem;
     overflow: hidden;
-    padding-top: 64px;
   }
 
-  /* Animated grid */
-  .hero-grid {
-    position: absolute;
-    inset: -50%;
-    background-image:
-      linear-gradient(var(--color-grid-line) 1px, transparent 1px),
-      linear-gradient(90deg, var(--color-grid-line) 1px, transparent 1px);
-    background-size: 60px 60px;
-    animation: gridPulse 8s ease-in-out infinite;
-    transform: perspective(500px) rotateX(2deg);
+  /* ── Main content ── */
+  .hero-main {
+    flex: 1;
+    max-width: 520px;
+    animation: heroReveal 1s var(--ease-settle) both;
   }
 
-  /* Scanline overlay */
-  .scanlines {
-    position: absolute;
-    inset: 0;
-    background: repeating-linear-gradient(
-      to bottom,
-      transparent,
-      transparent 2px,
-      rgba(0, 0, 0, 0.03) 2px,
-      rgba(0, 0, 0, 0.03) 4px
-    );
-    pointer-events: none;
-    z-index: 2;
+  @keyframes heroReveal {
+    from {
+      opacity: 0;
+      transform: translateY(16px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
   }
 
-  /* Corner brackets - HUD decoration */
-  .corner {
-    position: absolute;
-    width: 40px;
-    height: 40px;
-    z-index: 3;
-    opacity: 0.3;
-  }
-  .corner-tl {
-    top: 80px;
-    left: 24px;
-    border-top: 2px solid var(--color-accent);
-    border-left: 2px solid var(--color-accent);
-  }
-  .corner-tr {
-    top: 80px;
-    right: 24px;
-    border-top: 2px solid var(--color-accent);
-    border-right: 2px solid var(--color-accent);
-  }
-  .corner-bl {
-    bottom: 24px;
-    left: 24px;
-    border-bottom: 2px solid var(--color-amber);
-    border-left: 2px solid var(--color-amber);
-  }
-  .corner-br {
-    bottom: 24px;
-    right: 24px;
-    border-bottom: 2px solid var(--color-amber);
-    border-right: 2px solid var(--color-amber);
-  }
-
-  /* Particles */
-  .particles {
-    position: absolute;
-    inset: 0;
-    pointer-events: none;
-  }
-
-  .particle {
-    position: absolute;
-    width: 4px;
-    height: 4px;
-    border-radius: 50%;
-    animation: drift linear infinite;
-  }
-
-  .p1 { top: 20%; left: 15%; background: var(--color-accent); opacity: 0.7; animation-duration: 18s; box-shadow: 0 0 8px var(--color-accent); }
-  .p2 { top: 60%; left: 80%; background: var(--color-amber); opacity: 0.5; animation-duration: 22s; animation-delay: -4s; box-shadow: 0 0 8px var(--color-amber); }
-  .p3 { top: 35%; left: 65%; background: var(--color-accent); opacity: 0.4; animation-duration: 25s; animation-delay: -8s; width: 3px; height: 3px; box-shadow: 0 0 6px var(--color-accent); }
-  .p4 { top: 75%; left: 25%; background: var(--color-amber); opacity: 0.6; animation-duration: 20s; animation-delay: -2s; box-shadow: 0 0 8px var(--color-amber); }
-  .p5 { top: 45%; left: 40%; background: var(--color-accent); opacity: 0.3; animation-duration: 28s; animation-delay: -12s; width: 2px; height: 2px; box-shadow: 0 0 4px var(--color-accent); }
-  .p6 { top: 15%; left: 85%; background: var(--color-accent-bright); opacity: 0.5; animation-duration: 16s; animation-delay: -6s; box-shadow: 0 0 10px var(--color-accent); }
-  .p7 { top: 80%; left: 55%; background: var(--color-amber); opacity: 0.4; animation-duration: 24s; animation-delay: -10s; width: 3px; height: 3px; box-shadow: 0 0 6px var(--color-amber); }
-  .p8 { top: 50%; left: 10%; background: var(--color-accent); opacity: 0.35; animation-duration: 30s; animation-delay: -15s; width: 2px; height: 2px; box-shadow: 0 0 4px var(--color-accent); }
-
-  /* Vignette */
-  .hero-vignette {
-    position: absolute;
-    inset: 0;
-    background: radial-gradient(ellipse at center, transparent 40%, var(--color-bg) 100%);
-    pointer-events: none;
-    z-index: 1;
-  }
-
-  /* Bottom fade to page bg */
-  .hero-fade {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    height: 120px;
-    background: linear-gradient(to bottom, transparent, var(--color-bg));
-    pointer-events: none;
-    z-index: 1;
-  }
-
-  /* Content */
-  .hero-content {
-    position: relative;
-    z-index: 4;
-    text-align: center;
-    padding: 0 1.5rem;
-    animation: fadeInUp 0.8s ease-out both;
-  }
-
-  /* Label above name */
-  .hero-label {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 0.75rem;
-    margin-bottom: 1.25rem;
-  }
-
-  .label-line {
-    width: 40px;
-    height: 1px;
-    background: var(--color-border-bright);
-  }
-
-  .label-text {
-    font-family: var(--font-mono);
-    font-size: 0.7rem;
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-    color: var(--color-text-muted);
+  .hero-brush {
+    color: var(--color-border);
+    margin-bottom: 2.5rem;
+    opacity: 0.6;
   }
 
   .hero-name {
     font-family: var(--font-display);
-    font-size: clamp(3rem, 8vw, 5rem);
-    font-weight: 700;
-    letter-spacing: 0.04em;
-    margin: 0 0 1rem;
-    background: linear-gradient(135deg, var(--color-text) 0%, var(--color-accent-bright) 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+    font-size: clamp(3.5rem, 8vw, 6rem);
+    font-weight: 300;
+    letter-spacing: -0.03em;
+    line-height: 0.95;
+    margin: 0 0 2rem;
+    color: var(--color-text);
   }
 
-  .hero-tagline-wrapper {
-    margin-bottom: 2.5rem;
+  .hero-first,
+  .hero-last {
+    display: block;
+  }
+
+  .hero-last {
+    margin-top: 0.1em;
   }
 
   .hero-tagline {
-    font-family: var(--font-mono);
-    font-size: clamp(0.85rem, 2vw, 1.05rem);
+    font-family: var(--font-body);
+    font-size: clamp(0.92rem, 1.5vw, 1.05rem);
     color: var(--color-text-secondary);
-    margin: 0;
-    letter-spacing: 0.02em;
+    line-height: 1.65;
+    margin: 0 0 2rem;
+    max-width: 420px;
   }
 
-  .tagline-text {
-    display: inline;
-    overflow: hidden;
-    white-space: nowrap;
-    animation: typing 2.5s steps(50) 0.5s both;
-  }
-
-  .tagline-cursor {
-    color: var(--color-accent);
-    font-weight: 300;
-    margin-left: 2px;
+  .hero-accent-line {
+    width: 50px;
+    height: 1.5px;
+    background: var(--color-accent);
+    opacity: 0.45;
+    margin-bottom: 2rem;
   }
 
   .hero-actions {
     display: flex;
-    gap: 1rem;
-    justify-content: center;
-    flex-wrap: wrap;
+    flex-direction: column;
+    gap: 0.6rem;
   }
 
-  .hero-btn {
-    font-family: var(--font-mono);
-    font-size: 0.85rem;
-    letter-spacing: 0.05em;
-    padding: 0.75rem 1.75rem;
-    border-radius: 4px;
+  .hero-link {
+    font-family: var(--font-body);
+    font-size: 0.92rem;
+    color: var(--color-indigo);
     text-decoration: none;
-    transition: all 0.25s ease;
-    text-transform: lowercase;
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
+    transition: color 0.4s ease-out;
   }
 
-  .btn-arrow {
-    transition: transform 0.25s ease;
-    font-size: 0.9em;
-  }
-
-  .hero-btn:hover .btn-arrow {
-    transform: translateX(3px);
-  }
-
-  .hero-btn-primary {
-    border: 1px solid var(--color-accent);
+  .hero-link:hover {
     color: var(--color-accent);
-    background: transparent;
-  }
-  .hero-btn-primary:hover {
-    background: var(--color-accent);
-    color: white;
-    box-shadow: 0 0 20px var(--color-accent-glow);
   }
 
-  .hero-btn-secondary {
-    border: 1px solid var(--color-border);
-    color: var(--color-text-secondary);
-    background: transparent;
-  }
-  .hero-btn-secondary:hover {
-    border-color: var(--color-amber);
-    color: var(--color-amber);
-    box-shadow: 0 0 20px var(--color-amber-dim);
+  .hero-arrow {
+    display: inline-block;
+    font-size: 0.85em;
+    transition: transform 0.4s var(--ease-settle);
   }
 
-  @media (max-width: 640px) {
-    .corner { display: none; }
+  .hero-link:hover .hero-arrow {
+    transform: translateX(4px);
   }
 
-  @media (max-width: 480px) {
-    .hero-actions {
-      flex-direction: column;
-      align-items: center;
+  /* ── Framed nature image ── */
+  .hero-frame {
+    flex-shrink: 0;
+    width: min(340px, 28vw);
+    height: min(480px, 40vw);
+    /* Wooden frame — warm walnut gradient */
+    background: linear-gradient(
+      145deg,
+      #8a7356 0%,
+      #6b5538 25%,
+      #7d6848 50%,
+      #5c4630 75%,
+      #8a7356 100%
+    );
+    padding: 7px;
+    border-radius: 2px;
+    box-shadow:
+      0 2px 8px rgba(44, 36, 24, 0.12),
+      0 8px 32px rgba(44, 36, 24, 0.1),
+      0 20px 60px rgba(44, 36, 24, 0.08),
+      inset 0 1px 0 rgba(255, 255, 255, 0.08),
+      inset 0 -1px 0 rgba(0, 0, 0, 0.15);
+    opacity: 0;
+    animation: frameAppear 1.2s ease-out 0.4s both;
+  }
+
+  @keyframes frameAppear {
+    from {
+      opacity: 0;
+      transform: translateY(8px);
     }
-    .hero-btn {
-      width: 100%;
-      max-width: 240px;
-      text-align: center;
-      justify-content: center;
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .hero-frame-mat {
+    width: 100%;
+    height: 100%;
+    /* Cream mat border between frame and image */
+    border: 4px solid rgba(242, 235, 223, 0.7);
+    overflow: hidden;
+  }
+
+  .hero-frame-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center 30%;
+    display: block;
+    filter: saturate(0.85) contrast(0.95);
+    transition: filter 0.8s ease;
+  }
+
+  .hero-frame:hover .hero-frame-img {
+    filter: saturate(1) contrast(1);
+  }
+
+  /* ── Mobile ── */
+  @media (max-width: 900px) {
+    .hero {
+      gap: 2.5rem;
+    }
+    .hero-frame {
+      width: 260px;
+      height: 370px;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .hero {
+      min-height: auto;
+      padding: 7rem 1.5rem 2rem;
+    }
+
+    .hero-main {
+      max-width: 100%;
+    }
+
+    .hero-name {
+      font-size: clamp(3.5rem, 12vw, 5rem);
+    }
+
+    .hero-frame {
+      display: none;
     }
   }
 </style>

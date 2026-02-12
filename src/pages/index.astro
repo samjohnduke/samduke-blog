@@ -27,27 +27,32 @@ const featuredProjects = (await getCollection("projects"))
   <Hero />
 
   <div class="home-content">
-    <!-- Recent Posts -->
+    <!-- Recent Writing -->
     <section class="home-section animate-fade-in-up" style="animation-delay: 0.1s;">
-      <SectionHeader title="Recent Posts" href="/blog" />
-      <div class="posts-grid">
-        {recentPosts.map((post) => (
+      <SectionHeader title="Recent Writing" kanji="随筆" href="/blog" />
+      <div class="entries">
+        {recentPosts.map((post, i) => (
           <BlogCard
             title={post.data.title}
-            description={post.data.description}
             date={post.data.date}
-            tags={post.data.tags}
             slug={post.id}
           />
         ))}
       </div>
     </section>
 
+    <!-- Wave divider -->
+    <div class="wave-sep" aria-hidden="true">
+      <svg width="120" height="12" viewBox="0 0 120 12" fill="none">
+        <path d="M0,6 Q15,1 30,6 Q45,11 60,6 Q75,1 90,6 Q105,11 120,6" stroke="currentColor" stroke-width="0.75" stroke-linecap="round"/>
+      </svg>
+    </div>
+
     <!-- Projects -->
     {featuredProjects.length > 0 && (
       <section class="home-section animate-fade-in-up" style="animation-delay: 0.2s;">
-        <SectionHeader title="Projects" href="/projects" />
-        <div class="projects-grid">
+        <SectionHeader title="Projects" kanji="作品" href="/projects" />
+        <div class="project-entries">
           {featuredProjects.map((project) => (
             <ProjectCard
               title={project.data.title}
@@ -60,11 +65,20 @@ const featuredProjects = (await getCollection("projects"))
       </section>
     )}
 
+    <!-- Wave divider -->
+    {recentNotes.length > 0 && (
+      <div class="wave-sep" aria-hidden="true">
+        <svg width="120" height="12" viewBox="0 0 120 12" fill="none">
+          <path d="M0,6 Q15,1 30,6 Q45,11 60,6 Q75,1 90,6 Q105,11 120,6" stroke="currentColor" stroke-width="0.75" stroke-linecap="round"/>
+        </svg>
+      </div>
+    )}
+
     <!-- Notes -->
     {recentNotes.length > 0 && (
       <section class="home-section animate-fade-in-up" style="animation-delay: 0.3s;">
-        <SectionHeader title="Notes" href="/notes" />
-        <div class="notes-list">
+        <SectionHeader title="Notes" kanji="手記" href="/notes" />
+        <div class="note-entries">
           {recentNotes.map((note) => (
             <NoteEntry
               title={note.data.title}
@@ -81,31 +95,34 @@ const featuredProjects = (await getCollection("projects"))
 
 <style>
   .home-content {
-    max-width: 800px;
+    max-width: 1060px;
     margin: 0 auto;
-    padding: 0 1.5rem 4rem;
+    padding: 0 1.5rem 6rem;
   }
 
   .home-section {
-    margin-bottom: 4rem;
+    margin-bottom: 1rem;
   }
 
-  .posts-grid {
+  .entries {
     display: flex;
     flex-direction: column;
-    gap: 1rem;
   }
 
-  .projects-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-    gap: 1rem;
+  .project-entries {
+    display: flex;
+    flex-direction: column;
   }
 
-  .notes-list {
-    background: var(--color-surface);
-    border: 1px solid var(--color-border);
-    border-radius: 6px;
-    padding: 0.5rem 1.25rem;
+  .note-entries {
+    padding-top: 0.25rem;
+  }
+
+  .wave-sep {
+    display: flex;
+    justify-content: center;
+    color: var(--color-border);
+    opacity: 0.4;
+    margin: 3.5rem 0;
   }
 </style>

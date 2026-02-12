@@ -1,36 +1,30 @@
 @import "tailwindcss";
 
-/* ── Fonts ── */
-@font-face {
-  font-family: "Chakra Petch";
-  font-style: normal;
-  font-display: swap;
-  font-weight: 300 700;
-  src: url("https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@300;400;500;600;700&display=swap");
-}
-
-/* ── Theme Tokens ── */
+/* ── Theme Tokens: Washi & Sumi ── */
 @theme {
-  --color-bg: #0f1117;
-  --color-bg-deep: #0a0e13;
-  --color-surface: #161b22;
-  --color-surface-hover: #1c2230;
-  --color-border: #2a3040;
-  --color-border-bright: #3a4560;
-  --color-text: #e6edf3;
-  --color-text-secondary: #8b949e;
-  --color-text-muted: #5a6370;
-  --color-accent: #3b82f6;
-  --color-accent-glow: rgba(59, 130, 246, 0.15);
-  --color-accent-bright: #60a5fa;
-  --color-amber: #f59e0b;
-  --color-amber-dim: rgba(245, 158, 11, 0.15);
-  --color-code-bg: #1a1f2b;
-  --color-grid-line: #1a2030;
+  --color-bg: #F2EBDF;
+  --color-bg-deep: #E8DFD0;
+  --color-surface: #F8F4EC;
+  --color-surface-hover: #F0EAE0;
+  --color-border: #D5C9B8;
+  --color-border-light: #E2D9CB;
+  --color-text: #1C1814;
+  --color-text-secondary: #5C5145;
+  --color-text-muted: #9A8E80;
+  --color-accent: #C03B44;
+  --color-accent-dim: rgba(192, 59, 68, 0.08);
+  --color-accent-bright: #D64550;
+  --color-indigo: #2B4B6F;
+  --color-indigo-dim: rgba(43, 75, 111, 0.08);
+  --color-seal: #B83030;
+  --color-code-bg: #EDE5D8;
 
-  --font-display: "Chakra Petch", "Segoe UI", sans-serif;
-  --font-body: "IBM Plex Sans", "Segoe UI", system-ui, sans-serif;
+  --font-display: "Cormorant Garamond", "Georgia", serif;
+  --font-body: "EB Garamond", "Georgia", serif;
   --font-mono: "JetBrains Mono", "Fira Code", ui-monospace, monospace;
+  --font-jp: "Noto Serif JP", serif;
+
+  --ease-settle: cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 /* ── Base Resets ── */
@@ -41,42 +35,45 @@
 }
 
 html {
-  color-scheme: dark;
+  color-scheme: light;
   scroll-behavior: smooth;
   scrollbar-width: thin;
-  scrollbar-color: var(--color-accent) var(--color-bg-deep);
+  scrollbar-color: var(--color-border) var(--color-bg);
+  overflow-x: hidden;
 }
 
 body {
   margin: 0;
   padding: 0;
   font-family: var(--font-body);
-  font-size: 1rem;
-  line-height: 1.7;
+  font-size: 1.1rem;
+  line-height: 1.85;
+  letter-spacing: 0.005em;
   color: var(--color-text);
   background-color: var(--color-bg);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  font-feature-settings: "liga" 1, "kern" 1, "onum" 1;
 }
 
 ::selection {
-  background-color: var(--color-accent);
-  color: white;
+  background-color: rgba(192, 59, 68, 0.15);
+  color: var(--color-text);
 }
 
 /* ── Scrollbar (webkit) ── */
 ::-webkit-scrollbar {
-  width: 8px;
+  width: 5px;
 }
 ::-webkit-scrollbar-track {
-  background: var(--color-bg-deep);
+  background: var(--color-bg);
 }
 ::-webkit-scrollbar-thumb {
-  background: var(--color-accent);
-  border-radius: 4px;
+  background: var(--color-border);
+  border-radius: 3px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: var(--color-accent-bright);
+  background: var(--color-text-muted);
 }
 
 /* ── Typography ── */
@@ -85,16 +82,16 @@ h1, h2, h3, h4, h5, h6 {
   font-weight: 600;
   line-height: 1.2;
   color: var(--color-text);
-  letter-spacing: 0.01em;
+  letter-spacing: -0.01em;
 }
 
 a {
-  color: var(--color-accent);
+  color: var(--color-indigo);
   text-decoration: none;
-  transition: color 0.2s ease;
+  transition: color 0.4s ease-out;
 }
 a:hover {
-  color: var(--color-accent-bright);
+  color: var(--color-accent);
 }
 
 /* ── Focus Ring ── */
@@ -106,122 +103,88 @@ a:hover {
 /* ── Code Blocks ── */
 pre {
   font-family: var(--font-mono);
-  font-size: 0.9rem;
+  font-size: 0.85rem;
   line-height: 1.6;
   background-color: var(--color-code-bg);
   border: 1px solid var(--color-border);
-  border-radius: 6px;
+  border-radius: 4px;
   padding: 1.25rem;
   overflow-x: auto;
-  position: relative;
 }
 
 code {
   font-family: var(--font-mono);
-  font-size: 0.875em;
+  font-size: 0.85em;
+  font-feature-settings: normal;
 }
 
 :not(pre) > code {
   background-color: var(--color-code-bg);
   border: 1px solid var(--color-border);
   padding: 0.15em 0.4em;
-  border-radius: 4px;
-  color: var(--color-accent-bright);
+  border-radius: 3px;
+  color: var(--color-accent);
 }
 
-/* ── Blockquotes ── */
+/* ── Blockquotes — wabi-sabi ── */
 blockquote {
-  border-left: 3px solid var(--color-amber);
-  padding-left: 1.25rem;
+  border-left: 2px solid var(--color-accent);
+  padding-left: 1.5rem;
   margin-left: 0;
   color: var(--color-text-secondary);
   font-style: italic;
+  transform: rotate(-0.3deg);
 }
 
-/* ── HR ── */
+/* ── HR — organic brush stroke ── */
 hr {
   border: none;
-  height: 1px;
-  background: var(--color-border);
-  box-shadow: 0 0 8px var(--color-accent-glow);
-  margin: 2rem 0;
+  height: 12px;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 12'%3E%3Cpath d='M0,6 Q100,2 200,6 Q300,10 400,6' fill='none' stroke='%23D5C9B8' stroke-width='0.75' stroke-linecap='round'/%3E%3Ccircle cx='200' cy='6' r='1.5' fill='%23D5C9B8'/%3E%3C/svg%3E") center no-repeat;
+  background-size: 100% 12px;
+  margin: 3rem 0;
+  opacity: 0.8;
 }
 
 /* ── Prose (blog post body) ── */
 .prose {
-  max-width: 800px;
+  max-width: 680px;
   margin: 0 auto;
   font-size: 1.1rem;
-  line-height: 1.7;
+  line-height: 1.85;
   color: var(--color-text);
 }
 .prose h2 {
   font-size: 1.8rem;
-  margin-top: 2.5rem;
-  margin-bottom: 1rem;
-  position: relative;
-  padding-left: 1rem;
-}
-.prose h2::before {
-  content: "";
-  position: absolute;
-  left: 0;
-  top: 0.2em;
-  width: 4px;
-  height: 1em;
-  background: var(--color-accent);
-  border-radius: 2px;
+  margin-top: 4.5rem;
+  margin-bottom: 1.25rem;
 }
 .prose h3 {
   font-size: 1.4rem;
-  margin-top: 2rem;
+  margin-top: 3.5rem;
   margin-bottom: 0.75rem;
-  padding-left: 1rem;
-  position: relative;
-}
-.prose h3::before {
-  content: "";
-  position: absolute;
-  left: 0;
-  top: 0.25em;
-  width: 4px;
-  height: 0.8em;
-  background: var(--color-amber);
-  border-radius: 2px;
 }
 .prose p {
-  margin-bottom: 1.25rem;
+  margin-bottom: 1.6rem;
 }
 .prose ul, .prose ol {
   padding-left: 1.5rem;
-  margin-bottom: 1.25rem;
+  margin-bottom: 1.6rem;
 }
 .prose li {
-  margin-bottom: 0.4rem;
+  margin-bottom: 0.5rem;
 }
 .prose img {
   max-width: 100%;
-  border-radius: 6px;
+  border-radius: 2px 4px 3px 2px;
   border: 1px solid var(--color-border);
-}
-
-/* ── Clip-path card utility ── */
-.clip-card {
-  clip-path: polygon(
-    0 0,
-    calc(100% - 10px) 0,
-    100% 10px,
-    100% 100%,
-    10px 100%,
-    0 calc(100% - 10px)
-  );
 }
 
 /* ── Animations ── */
 @keyframes fadeInUp {
   from {
     opacity: 0;
-    transform: translateY(12px);
+    transform: translateY(10px);
   }
   to {
     opacity: 1;
@@ -229,53 +192,26 @@ hr {
   }
 }
 
-@keyframes blink {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0; }
-}
-
-@keyframes float {
-  0%, 100% { transform: translateY(0px); }
-  50% { transform: translateY(-8px); }
-}
-
-@keyframes gridPulse {
-  0%, 100% { opacity: 0.3; }
-  50% { opacity: 0.6; }
-}
-
-@keyframes typing {
-  from { width: 0; }
-  to { width: 100%; }
-}
-
-@keyframes drift {
-  0% { transform: translate(0, 0); }
-  25% { transform: translate(10px, -15px); }
-  50% { transform: translate(-5px, -25px); }
-  75% { transform: translate(-15px, -10px); }
-  100% { transform: translate(0, 0); }
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
 }
 
 .animate-fade-in-up {
-  animation: fadeInUp 0.5s ease-out both;
+  animation: fadeInUp 0.7s var(--ease-settle) both;
 }
 
-.animate-blink {
-  animation: blink 1s step-end infinite;
-}
-
-/* ── View Transitions (opacity only, no morph/scale) ── */
+/* ── View Transitions ── */
 ::view-transition-group(root) {
   animation: none;
 }
 
 ::view-transition-old(root) {
-  animation: 150ms ease-out both vt-fade-out;
+  animation: 200ms ease-out both vt-fade-out;
 }
 
 ::view-transition-new(root) {
-  animation: 200ms ease-out both vt-fade-in;
+  animation: 300ms ease-out both vt-fade-in;
 }
 
 @keyframes vt-fade-out {

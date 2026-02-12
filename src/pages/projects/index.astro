@@ -10,10 +10,11 @@ const projects = (await getCollection("projects"))
 <Base title="Projects" description="Things I've built and am building.">
   <div class="page">
     <header class="page-header animate-fade-in-up">
+      <span class="page-kanji" aria-hidden="true">作品</span>
       <h1 class="page-title">Projects</h1>
       <p class="page-desc">Things I've built and am building.</p>
     </header>
-    <div class="projects-grid">
+    <div class="project-entries">
       {projects.map((project, i) => (
         <div class="animate-fade-in-up" style={`animation-delay: ${0.05 * (i + 1)}s;`}>
           <ProjectCard
@@ -30,19 +31,33 @@ const projects = (await getCollection("projects"))
 
 <style>
   .page {
-    max-width: 800px;
+    max-width: 1060px;
     margin: 0 auto;
-    padding: 7rem 1.5rem 4rem;
+    padding: 8rem 1.5rem 4rem;
   }
 
   .page-header {
-    margin-bottom: 2.5rem;
+    margin-bottom: 2rem;
+  }
+
+  .page-kanji {
+    font-family: var(--font-jp);
+    font-size: 5rem;
+    font-weight: 200;
+    color: var(--color-border);
+    opacity: 0.18;
+    line-height: 1;
+    display: block;
+    margin-bottom: -1.25rem;
+    user-select: none;
+    pointer-events: none;
   }
 
   .page-title {
     font-family: var(--font-display);
     font-size: clamp(2rem, 5vw, 2.8rem);
-    font-weight: 700;
+    font-weight: 300;
+    letter-spacing: -0.01em;
     margin: 0 0 0.5rem;
   }
 
@@ -52,9 +67,8 @@ const projects = (await getCollection("projects"))
     margin: 0;
   }
 
-  .projects-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-    gap: 1rem;
+  .project-entries {
+    display: flex;
+    flex-direction: column;
   }
 </style>

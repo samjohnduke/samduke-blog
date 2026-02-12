@@ -2,11 +2,11 @@
 
 ---
 
-<!-- Search modal overlay — lives at body level -->
+<!-- Search modal overlay -->
 <div class="search-overlay" id="search-overlay" aria-hidden="true">
   <div class="search-modal" role="dialog" aria-label="Search">
     <div class="search-header">
-      <svg class="search-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <svg class="search-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
         <circle cx="11" cy="11" r="8"/>
         <line x1="21" y1="21" x2="16.65" y2="16.65"/>
       </svg>
@@ -29,12 +29,11 @@
 </div>
 
 <style>
-  /* Overlay */
   .search-overlay {
     position: fixed;
     inset: 0;
     z-index: 200;
-    background: rgba(10, 14, 19, 0.7);
+    background: rgba(44, 36, 24, 0.15);
     backdrop-filter: blur(4px);
     display: flex;
     align-items: flex-start;
@@ -50,15 +49,14 @@
     pointer-events: auto;
   }
 
-  /* Modal */
   .search-modal {
     width: 100%;
     max-width: 560px;
     margin: 0 1rem;
     background: var(--color-surface);
     border: 1px solid var(--color-border);
-    border-radius: 8px;
-    box-shadow: 0 16px 48px rgba(0, 0, 0, 0.4), 0 0 24px var(--color-accent-glow);
+    border-radius: 6px;
+    box-shadow: 0 16px 48px rgba(44, 36, 24, 0.12);
     overflow: hidden;
     transform: translateY(-8px);
     transition: transform 0.15s ease;
@@ -68,7 +66,6 @@
     transform: translateY(0);
   }
 
-  /* Header / input */
   .search-header {
     display: flex;
     align-items: center;
@@ -87,10 +84,9 @@
     background: none;
     border: none;
     outline: none;
-    font-family: var(--font-mono);
-    font-size: 0.9rem;
+    font-family: var(--font-body);
+    font-size: 0.95rem;
     color: var(--color-text);
-    letter-spacing: 0.01em;
   }
 
   .search-input::placeholder {
@@ -99,7 +95,7 @@
 
   .search-esc {
     font-family: var(--font-mono);
-    font-size: 0.65rem;
+    font-size: 0.6rem;
     padding: 2px 6px;
     background: var(--color-bg);
     border: 1px solid var(--color-border);
@@ -108,12 +104,11 @@
     flex-shrink: 0;
   }
 
-  /* Results */
   .search-results {
     max-height: 400px;
     overflow-y: auto;
     scrollbar-width: thin;
-    scrollbar-color: var(--color-accent) var(--color-surface);
+    scrollbar-color: var(--color-border-bright) var(--color-surface);
   }
 
   .search-empty {
@@ -122,10 +117,11 @@
   }
 
   .search-empty-text {
-    font-family: var(--font-mono);
-    font-size: 0.8rem;
+    font-family: var(--font-body);
+    font-size: 0.85rem;
     color: var(--color-text-muted);
     margin: 0;
+    font-style: italic;
   }
 
   /* Result items (injected via JS) */
@@ -136,8 +132,8 @@
     padding: 0.75rem 1rem;
     text-decoration: none;
     color: inherit;
-    border-bottom: 1px solid rgba(42, 48, 64, 0.5);
-    transition: background 0.1s ease;
+    border-bottom: 1px solid var(--color-border);
+    transition: background 0.15s ease;
     cursor: pointer;
   }
 
@@ -147,12 +143,12 @@
 
   .search-results :global(.search-result:hover),
   .search-results :global(.search-result.active) {
-    background: rgba(59, 130, 246, 0.08);
+    background: var(--color-surface-hover);
   }
 
   .search-results :global(.result-type) {
     font-family: var(--font-mono);
-    font-size: 0.6rem;
+    font-size: 0.58rem;
     letter-spacing: 0.06em;
     text-transform: uppercase;
     padding: 0.2em 0.5em;
@@ -163,16 +159,16 @@
 
   .search-results :global(.result-type.blog) {
     background: var(--color-accent-glow);
-    color: var(--color-accent-bright);
+    color: var(--color-accent);
   }
 
   .search-results :global(.result-type.project) {
-    background: var(--color-amber-dim);
-    color: var(--color-amber);
+    background: var(--color-indigo-dim);
+    color: var(--color-indigo);
   }
 
   .search-results :global(.result-type.note) {
-    background: rgba(139, 148, 158, 0.12);
+    background: rgba(160, 149, 133, 0.1);
     color: var(--color-text-secondary);
   }
 
@@ -182,7 +178,7 @@
 
   .search-results :global(.result-title) {
     font-family: var(--font-display);
-    font-size: 0.9rem;
+    font-size: 0.95rem;
     font-weight: 600;
     color: var(--color-text);
     margin: 0 0 0.15rem;
@@ -190,7 +186,7 @@
 
   .search-results :global(.result-title mark) {
     background: none;
-    color: var(--color-accent-bright);
+    color: var(--color-accent);
     text-decoration: underline;
     text-underline-offset: 2px;
   }
@@ -212,9 +208,10 @@
   .search-results :global(.search-no-results) {
     padding: 2rem 1rem;
     text-align: center;
-    font-family: var(--font-mono);
-    font-size: 0.8rem;
+    font-family: var(--font-body);
+    font-size: 0.85rem;
     color: var(--color-text-muted);
+    font-style: italic;
   }
 </style>
 
@@ -274,7 +271,7 @@
     overlay.classList.remove("open");
     overlay.setAttribute("aria-hidden", "true");
     input.value = "";
-    results.innerHTML = "";
+    results.textContent = "";
     results.appendChild(empty);
     empty.style.display = "";
     activeIndex = -1;
@@ -307,11 +304,42 @@
     return result;
   }
 
+  function renderResult(item: SearchItem, titleHtml: string, descHtml: string): HTMLAnchorElement {
+    const a = document.createElement("a");
+    a.href = item.slug;
+    a.className = "search-result";
+
+    const typeSpan = document.createElement("span");
+    typeSpan.className = `result-type ${item.type}`;
+    typeSpan.textContent = item.type;
+
+    const bodyDiv = document.createElement("div");
+    bodyDiv.className = "result-body";
+
+    const titleP = document.createElement("p");
+    titleP.className = "result-title";
+    // titleHtml is built from escapeHtml'd content + safe <mark> tags
+    titleP.innerHTML = titleHtml;
+
+    bodyDiv.appendChild(titleP);
+
+    if (descHtml) {
+      const descP = document.createElement("p");
+      descP.className = "result-desc";
+      descP.innerHTML = descHtml;
+      bodyDiv.appendChild(descP);
+    }
+
+    a.appendChild(typeSpan);
+    a.appendChild(bodyDiv);
+    return a;
+  }
+
   function search(query: string) {
     const { results, empty } = getEls();
 
     if (!fuse || query.length < 2) {
-      results.innerHTML = "";
+      results.textContent = "";
       results.appendChild(empty);
       empty.style.display = "";
       empty.querySelector(".search-empty-text")!.textContent = "type to search across all content";
@@ -323,33 +351,30 @@
     activeIndex = -1;
 
     if (hits.length === 0) {
-      results.innerHTML = `<div class="search-no-results">no results for "${escapeHtml(query)}"</div>`;
+      results.textContent = "";
+      const noResults = document.createElement("div");
+      noResults.className = "search-no-results";
+      noResults.textContent = `no results for "${query}"`;
+      results.appendChild(noResults);
       return;
     }
 
-    results.innerHTML = hits
-      .map((hit) => {
-        const item = hit.item;
-        const titleMatch = hit.matches?.find((m) => m.key === "title");
-        const descMatch = hit.matches?.find((m) => m.key === "description");
+    results.textContent = "";
+    for (const hit of hits) {
+      const item = hit.item;
+      const titleMatch = hit.matches?.find((m) => m.key === "title");
+      const descMatch = hit.matches?.find((m) => m.key === "description");
 
-        const titleHtml = highlightMatch(item.title, titleMatch?.indices);
-        const descHtml = item.description
-          ? highlightMatch(
-              item.description.slice(0, 100),
-              descMatch?.indices?.map(([s, e]) => [s, Math.min(e, 99)] as [number, number])
-            )
-          : "";
+      const titleHtml = highlightMatch(item.title, titleMatch?.indices);
+      const descHtml = item.description
+        ? highlightMatch(
+            item.description.slice(0, 100),
+            descMatch?.indices?.map(([s, e]) => [s, Math.min(e, 99)] as [number, number])
+          )
+        : "";
 
-        return `<a href="${item.slug}" class="search-result">
-          <span class="result-type ${item.type}">${item.type}</span>
-          <div class="result-body">
-            <p class="result-title">${titleHtml}</p>
-            ${descHtml ? `<p class="result-desc">${descHtml}</p>` : ""}
-          </div>
-        </a>`;
-      })
-      .join("");
+      results.appendChild(renderResult(item, titleHtml, descHtml));
+    }
   }
 
   function setActive(index: number) {
@@ -363,7 +388,6 @@
     activeIndex = index;
   }
 
-  // Global keyboard shortcut — works on every page
   document.addEventListener("keydown", (e) => {
     const overlay = document.getElementById("search-overlay");
     if (!overlay) return;
@@ -395,7 +419,6 @@
     }
   });
 
-  // Click on nav trigger button
   document.addEventListener("click", (e) => {
     const trigger = (e.target as HTMLElement).closest("#search-trigger-nav");
     if (trigger) {
@@ -410,7 +433,6 @@
     }
   });
 
-  // Input handler
   document.getElementById("search-input")?.addEventListener("input", () => {
     const input = document.getElementById("search-input") as HTMLInputElement;
     search(input.value.trim());

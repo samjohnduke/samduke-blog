@@ -31,12 +31,12 @@ const formattedDate = date.toLocaleDateString("en-US", {
     display: flex;
     align-items: baseline;
     gap: 1.25rem;
-    padding: 0.75rem 0;
-    border-bottom: 1px solid var(--color-border);
+    padding: 0.85rem 0;
+    border-bottom: 1px solid var(--color-border-light);
     text-decoration: none;
     color: inherit;
     transition: background 0.2s ease;
-    border-radius: 4px;
+    border-radius: 2px;
   }
 
   .note-entry:last-child,
@@ -45,13 +45,13 @@ const formattedDate = date.toLocaleDateString("en-US", {
   }
 
   .note-entry:hover {
-    background: rgba(22, 27, 34, 0.5);
+    background: rgba(0, 0, 0, 0.015);
   }
 
   .note-date {
     font-family: var(--font-mono);
-    font-size: 0.75rem;
-    color: var(--color-amber);
+    font-size: 0.68rem;
+    color: var(--color-text-muted);
     letter-spacing: 0.02em;
     flex-shrink: 0;
     min-width: 90px;
@@ -66,17 +66,18 @@ const formattedDate = date.toLocaleDateString("en-US", {
   }
 
   .note-title {
+    font-family: var(--font-body);
     font-size: 0.95rem;
     color: var(--color-text);
-    transition: color 0.2s ease;
+    transition: color 0.4s ease-out;
   }
 
   .note-entry:hover .note-title {
-    color: var(--color-accent-bright);
+    color: var(--color-accent);
   }
 
   .note-desc {
-    font-size: 0.85rem;
+    font-size: 0.82rem;
     color: var(--color-text-muted);
     white-space: nowrap;
     overflow: hidden;
@@ -86,12 +87,14 @@ const formattedDate = date.toLocaleDateString("en-US", {
   .note-arrow {
     flex-shrink: 0;
     color: var(--color-text-muted);
-    transition: transform 0.2s ease, color 0.2s ease;
+    opacity: 0.3;
+    transition: transform 0.4s var(--ease-settle), color 0.4s ease-out, opacity 0.4s ease-out;
     align-self: center;
   }
 
   .note-entry:hover .note-arrow {
     color: var(--color-accent);
+    opacity: 1;
     transform: translateX(2px);
   }
 
@@ -107,7 +110,7 @@ const formattedDate = date.toLocaleDateString("en-US", {
     .note-arrow {
       position: absolute;
       right: 0;
-      top: 0.75rem;
+      top: 0.85rem;
     }
   }
 </style>

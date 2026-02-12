@@ -34,23 +34,23 @@ const formattedDate = date.toLocaleDateString("en-US", {
 
 <style>
   .note {
-    max-width: 800px;
+    max-width: 680px;
     margin: 0 auto;
-    padding: 7rem 1.5rem 4rem;
+    padding: 8rem 1.5rem 4rem;
   }
 
   .note-header {
-    margin-bottom: 2.5rem;
+    margin-bottom: 3rem;
   }
 
   .note-back {
     display: inline-block;
-    font-family: var(--font-mono);
-    font-size: 0.8rem;
+    font-family: var(--font-body);
+    font-size: 0.85rem;
     color: var(--color-text-muted);
     text-decoration: none;
     margin-bottom: 1.5rem;
-    transition: color 0.2s ease;
+    transition: color 0.3s ease;
   }
   .note-back:hover {
     color: var(--color-accent);
@@ -59,10 +59,9 @@ const formattedDate = date.toLocaleDateString("en-US", {
   .note-title {
     font-family: var(--font-display);
     font-size: clamp(1.8rem, 5vw, 2.5rem);
-    font-weight: 700;
+    font-weight: 400;
     line-height: 1.15;
-    margin: 0 0 1rem;
-    letter-spacing: 0.01em;
+    margin: 0 0 1.25rem;
   }
 
   .note-meta {
@@ -73,7 +72,7 @@ const formattedDate = date.toLocaleDateString("en-US", {
 
   .note-date {
     font-family: var(--font-mono);
-    font-size: 0.8rem;
+    font-size: 0.68rem;
     color: var(--color-text-muted);
     letter-spacing: 0.02em;
   }

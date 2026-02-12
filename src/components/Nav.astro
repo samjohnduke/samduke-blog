@@ -1,15 +1,15 @@
 ---
 const pathname = Astro.url.pathname;
 const links = [
-  { href: "/blog", label: "blog" },
-  { href: "/projects", label: "projects" },
-  { href: "/notes", label: "notes" },
+  { href: "/blog", label: "Blog" },
+  { href: "/projects", label: "Projects" },
+  { href: "/notes", label: "Notes" },
 ];
 ---
 
 <nav class="nav" id="main-nav">
   <div class="nav-inner">
-    <a href="/" class="nav-logo">SAM DUKE</a>
+    <a href="/" class="nav-logo">Sam Duke</a>
     <div class="nav-right">
       <div class="nav-links">
         {links.map((link) => (
@@ -22,7 +22,7 @@ const links = [
         ))}
       </div>
       <button class="search-trigger" id="search-trigger-nav" aria-label="Search (Cmd+K)">
-        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
           <circle cx="11" cy="11" r="8"/>
           <line x1="21" y1="21" x2="16.65" y2="16.65"/>
         </svg>
@@ -58,11 +58,10 @@ const links = [
     left: 0;
     right: 0;
     z-index: 100;
-    background: rgba(15, 17, 23, 0.8);
-    backdrop-filter: blur(16px);
-    -webkit-backdrop-filter: blur(16px);
-    border-bottom: 1px solid var(--color-border);
-    box-shadow: 0 1px 12px var(--color-accent-glow);
+    background: rgba(242, 235, 223, 0.85);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--color-border-light);
     transition: transform 0.3s ease;
   }
 
@@ -71,27 +70,26 @@ const links = [
   }
 
   .nav-inner {
-    max-width: 800px;
+    max-width: 1060px;
     margin: 0 auto;
     padding: 0 1.5rem;
-    height: 64px;
+    height: 56px;
     display: flex;
     align-items: center;
     justify-content: space-between;
   }
 
   .nav-logo {
-    font-family: var(--font-mono);
-    font-size: 0.95rem;
-    font-weight: 700;
-    letter-spacing: 0.15em;
+    font-family: var(--font-display);
+    font-size: 1.1rem;
+    font-weight: 400;
     color: var(--color-text);
     text-decoration: none;
-    transition: opacity 0.2s ease;
+    letter-spacing: 0.02em;
+    transition: color 0.4s ease-out;
   }
   .nav-logo:hover {
-    opacity: 0.8;
-    color: var(--color-text);
+    color: var(--color-accent);
   }
 
   .nav-right {
@@ -106,16 +104,13 @@ const links = [
   }
 
   .nav-link {
-    font-family: var(--font-mono);
-    font-size: 0.8rem;
-    font-weight: 500;
-    letter-spacing: 0.08em;
-    color: var(--color-text-secondary);
+    font-family: var(--font-body);
+    font-size: 0.88rem;
+    color: var(--color-text-muted);
     text-decoration: none;
     position: relative;
-    padding-bottom: 4px;
-    transition: color 0.2s ease;
-    text-transform: lowercase;
+    padding-bottom: 2px;
+    transition: color 0.4s ease-out;
   }
 
   .nav-link::after {
@@ -124,13 +119,13 @@ const links = [
     bottom: 0;
     left: 0;
     width: 0;
-    height: 2px;
-    background: var(--color-amber);
-    transition: width 0.25s ease;
+    height: 1px;
+    background: var(--color-accent);
+    transition: width 0.4s ease-out;
   }
 
   .nav-link:hover {
-    color: var(--color-amber);
+    color: var(--color-text);
   }
   .nav-link:hover::after {
     width: 100%;
@@ -141,7 +136,7 @@ const links = [
   }
   .nav-link.active::after {
     width: 100%;
-    background: var(--color-accent);
+    background: var(--color-text-muted);
   }
 
   .nav-toggle {
@@ -153,7 +148,7 @@ const links = [
     border-radius: 4px;
     padding: 8px 10px;
     cursor: pointer;
-    transition: border-color 0.2s ease;
+    transition: border-color 0.3s ease;
   }
   .nav-toggle:hover {
     border-color: var(--color-accent);
@@ -162,27 +157,27 @@ const links = [
   .toggle-bar {
     display: block;
     width: 18px;
-    height: 2px;
+    height: 1.5px;
     background: var(--color-text);
     transition: transform 0.2s ease, opacity 0.2s ease;
   }
 
   .nav-toggle.open .toggle-bar:first-child {
-    transform: translateY(3.5px) rotate(45deg);
+    transform: translateY(3.25px) rotate(45deg);
   }
   .nav-toggle.open .toggle-bar:last-child {
-    transform: translateY(-3.5px) rotate(-45deg);
+    transform: translateY(-3.25px) rotate(-45deg);
   }
 
   .mobile-menu {
     position: fixed;
-    top: 64px;
+    top: 56px;
     left: 0;
     right: 0;
     z-index: 99;
-    background: rgba(15, 17, 23, 0.95);
-    backdrop-filter: blur(16px);
-    border-bottom: 1px solid var(--color-border);
+    background: rgba(242, 235, 223, 0.95);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--color-border-light);
     transform: translateY(-100%);
     opacity: 0;
     transition: transform 0.3s ease, opacity 0.3s ease;
@@ -204,22 +199,20 @@ const links = [
   }
 
   .mobile-link {
-    font-family: var(--font-mono);
-    font-size: 0.9rem;
-    letter-spacing: 0.08em;
-    color: var(--color-text-secondary);
+    font-family: var(--font-body);
+    font-size: 1rem;
+    color: var(--color-text-muted);
     text-decoration: none;
     padding: 0.75rem 1rem;
-    border-radius: 6px;
+    border-radius: 4px;
     transition: background 0.2s ease, color 0.2s ease;
-    text-transform: lowercase;
   }
   .mobile-link:hover {
     background: var(--color-surface);
-    color: var(--color-amber);
+    color: var(--color-accent);
   }
   .mobile-link.active {
-    color: var(--color-accent);
+    color: var(--color-text);
     background: var(--color-surface);
   }
 
@@ -230,12 +223,12 @@ const links = [
     background: none;
     border: 1px solid var(--color-border);
     border-radius: 4px;
-    padding: 0.4rem 0.6rem;
+    padding: 0.35rem 0.55rem;
     cursor: pointer;
     color: var(--color-text-muted);
     font-family: var(--font-mono);
-    font-size: 0.75rem;
-    transition: border-color 0.2s ease, color 0.2s ease;
+    font-size: 0.7rem;
+    transition: border-color 0.3s ease, color 0.3s ease;
   }
 
   .search-trigger:hover {
@@ -250,9 +243,9 @@ const links = [
 
   .search-shortcut kbd {
     font-family: var(--font-mono);
-    font-size: 0.65rem;
+    font-size: 0.6rem;
     padding: 1px 4px;
-    background: var(--color-surface);
+    background: var(--color-bg-deep);
     border: 1px solid var(--color-border);
     border-radius: 3px;
     color: var(--color-text-muted);
@@ -276,7 +269,6 @@ const links = [
 </style>
 
 <script>
-  // Scroll-aware nav hide/show
   let lastScroll = 0;
   const nav = document.getElementById("main-nav");
   const toggle = document.getElementById("nav-toggle");
