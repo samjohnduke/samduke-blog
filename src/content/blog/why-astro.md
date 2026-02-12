@@ -1,15 +1,14 @@
 ---
 title: Why I Rebuilt My Blog with Astro
-description: After years of React-based blogs, I switched to Astro. Zero JavaScript by default changed everything.
-date: "2026-02-05T00:00:00.000Z"
+description: Writing is hard, and I want to remove barriers
+date: "2026-02-16"
 tags:
   - astro
   - web
-  - performance
+  - human
 draft: false
 ---
 
 *Or what in the world, is AI good now?*
 
-
-
+I'm not a good writer, but not be I inherently suck at it or anything. Its because I struggle to focus on writing
