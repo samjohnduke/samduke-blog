@@ -2,27 +2,29 @@
 
 /* ── Theme Tokens: Washi & Sumi ── */
 @theme {
-  --color-bg: #F2EBDF;
-  --color-bg-deep: #E8DFD0;
-  --color-surface: #F8F4EC;
-  --color-surface-hover: #F0EAE0;
-  --color-border: #D5C9B8;
-  --color-border-light: #E2D9CB;
-  --color-text: #1C1814;
-  --color-text-secondary: #5C5145;
-  --color-text-muted: #9A8E80;
-  --color-accent: #C03B44;
-  --color-accent-dim: rgba(192, 59, 68, 0.08);
-  --color-accent-bright: #D64550;
-  --color-indigo: #2B4B6F;
-  --color-indigo-dim: rgba(43, 75, 111, 0.08);
-  --color-seal: #B83030;
-  --color-code-bg: #EDE5D8;
+  --color-bg: #F0E8DA;
+  --color-bg-deep: #E4DACB;
+  --color-surface: #F5F0E6;
+  --color-surface-hover: #ECE5D8;
+  --color-border: #C4B7A2;
+  --color-border-light: #D5C9B6;
+  --color-text: #1A1612;
+  --color-text-secondary: #3E352C;
+  --color-text-muted: #746859;
+  --color-accent: #B42D36;
+  --color-accent-dim: rgba(180, 45, 54, 0.1);
+  --color-accent-bright: #C93A44;
+  --color-indigo: #1E3A5C;
+  --color-indigo-dim: rgba(30, 58, 92, 0.1);
+  --color-seal: #A82828;
+  --color-code-bg: #E8DFCF;
 
   --font-display: "Cormorant Garamond", "Georgia", serif;
   --font-body: "EB Garamond", "Georgia", serif;
   --font-mono: "JetBrains Mono", "Fira Code", ui-monospace, monospace;
   --font-jp: "Noto Serif JP", serif;
+
+  --width-content: 720px;
 
   --ease-settle: cubic-bezier(0.22, 1, 0.36, 1);
 }
@@ -47,7 +49,7 @@ body {
   padding: 0;
   font-family: var(--font-body);
   font-size: 1.1rem;
-  line-height: 1.85;
+  line-height: 1.75;
   letter-spacing: 0.005em;
   color: var(--color-text);
   background-color: var(--color-bg);
@@ -57,7 +59,7 @@ body {
 }
 
 ::selection {
-  background-color: rgba(192, 59, 68, 0.15);
+  background-color: rgba(180, 45, 54, 0.2);
   color: var(--color-text);
 }
 
@@ -128,7 +130,7 @@ code {
 
 /* ── Blockquotes — wabi-sabi ── */
 blockquote {
-  border-left: 2px solid var(--color-accent);
+  border-left: 3px solid var(--color-accent);
   padding-left: 1.5rem;
   margin-left: 0;
   color: var(--color-text-secondary);
@@ -143,7 +145,7 @@ hr {
   background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 12'%3E%3Cpath d='M0,6 Q100,2 200,6 Q300,10 400,6' fill='none' stroke='%23D5C9B8' stroke-width='0.75' stroke-linecap='round'/%3E%3Ccircle cx='200' cy='6' r='1.5' fill='%23D5C9B8'/%3E%3C/svg%3E") center no-repeat;
   background-size: 100% 12px;
   margin: 3rem 0;
-  opacity: 0.8;
+  opacity: 0.9;
 }
 
 /* ── Prose (blog post body) ── */
@@ -151,7 +153,7 @@ hr {
   max-width: 680px;
   margin: 0 auto;
   font-size: 1.1rem;
-  line-height: 1.85;
+  line-height: 1.75;
   color: var(--color-text);
 }
 .prose h2 {

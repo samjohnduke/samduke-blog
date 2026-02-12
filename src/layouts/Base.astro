@@ -61,8 +61,8 @@ const { title, description = "Sam Duke — web developer, founder, builder on th
     display: flex;
     flex-direction: column;
     background:
-      radial-gradient(ellipse at 10% 0%, rgba(192, 59, 68, 0.025) 0%, transparent 50%),
-      radial-gradient(ellipse at 90% 100%, rgba(43, 75, 111, 0.02) 0%, transparent 50%),
+      radial-gradient(ellipse at 10% 0%, rgba(180, 45, 54, 0.04) 0%, transparent 50%),
+      radial-gradient(ellipse at 90% 100%, rgba(30, 58, 92, 0.035) 0%, transparent 50%),
       var(--color-bg);
   }
 
@@ -71,8 +71,8 @@ const { title, description = "Sam Duke — web developer, founder, builder on th
     content: "";
     position: fixed;
     inset: 0;
-    border: 10px solid var(--color-bg);
-    box-shadow: inset 0 0 0 1px rgba(213, 201, 184, 0.35);
+    border: 14px solid var(--color-bg);
+    box-shadow: inset 0 0 0 1px rgba(180, 165, 145, 0.5);
     pointer-events: none;
     z-index: 50;
   }
@@ -85,7 +85,7 @@ const { title, description = "Sam Duke — web developer, founder, builder on th
     z-index: 10000;
     pointer-events: none;
     filter: url(#grain);
-    opacity: 0.035;
+    opacity: 0.05;
   }
 
   /* Vertical side text — runs down the right edge */
@@ -99,7 +99,7 @@ const { title, description = "Sam Duke — web developer, founder, builder on th
     font-size: 0.55rem;
     letter-spacing: 0.35em;
     color: var(--color-border);
-    opacity: 0.3;
+    opacity: 0.45;
     z-index: 50;
     pointer-events: none;
     user-select: none;
@@ -121,7 +121,8 @@ const { title, description = "Sam Duke — web developer, founder, builder on th
 
   @media (max-width: 900px) {
     body::before {
-      inset: 6px;
+      inset: 0;
+      border-width: 10px;
     }
     .side-text {
       display: none;
@@ -138,5 +139,6 @@ const { title, description = "Sam Duke — web developer, founder, builder on th
 <script>
   document.addEventListener("astro:after-swap", () => {
     document.body.classList.add("vt-nav");
+    document.getElementById("main-nav")?.classList.remove("hidden");
   });
 </script>

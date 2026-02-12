@@ -95,7 +95,7 @@ const featuredProjects = (await getCollection("projects"))
 
 <style>
   .home-content {
-    max-width: 1060px;
+    max-width: var(--width-content);
     margin: 0 auto;
     padding: 0 1.5rem 6rem;
   }
@@ -122,7 +122,7 @@ const featuredProjects = (await getCollection("projects"))
     display: flex;
     justify-content: center;
     color: var(--color-border);
-    opacity: 0.4;
+    opacity: 0.6;
     margin: 3.5rem 0;
   }
 </style>

@@ -409,12 +409,11 @@
     } else if (e.key === "ArrowUp") {
       e.preventDefault();
       setActive(Math.max(activeIndex - 1, 0));
-    } else if (e.key === "Enter" && activeIndex >= 0) {
+    } else if (e.key === "Enter" && items.length > 0) {
       e.preventDefault();
-      const active = items[activeIndex] as HTMLAnchorElement;
-      if (active) {
-        close();
-        window.location.href = active.href;
+      const target = items[activeIndex >= 0 ? activeIndex : 0] as HTMLAnchorElement;
+      if (target) {
+        target.click();
       }
     }
   });
