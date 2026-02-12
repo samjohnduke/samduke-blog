@@ -1,9 +1,11 @@
 ---
-title: "Chameleon Creator"
-description: "The company I founded. Building tools for creators and developers on the web."
-url: "https://chameleoncreator.com"
-repo: "https://github.com/chameleoncreator"
-tags: ["typescript", "react", "cloudflare"]
+title: Chameleon Creator
+description: The company I co-founded with a mate. We build tools for Learning Designers to create easy, fast and beautiful learning content
+url: https://chameleoncreator.com
+tags:
+  - typescript
+  - react
+  - cloudflare
 featured: true
 order: 1
 ---
@@ -32,3 +34,4 @@ The hardest part hasn't been the technology. It's been learning to make decision
 - **Developer experience** is a feature, not a nice-to-have
 - The best tools are the ones that **get out of your way**
 - Building a company is a crash course in everything you thought you knew
+
