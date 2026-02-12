@@ -147,30 +147,33 @@ const notes = (await getCollection("notes"))
 </style>
 
 <script>
-  const input = document.getElementById("notes-filter") as HTMLInputElement;
-  const list = document.getElementById("notes-list")!;
-  const count = document.getElementById("filter-count")!;
-  const emptyMsg = document.getElementById("notes-empty")!;
-  const entries = list.querySelectorAll<HTMLElement>(".note-entry");
-  const total = entries.length;
+  document.addEventListener('astro:page-load', () => {
+    const input = document.getElementById("notes-filter") as HTMLInputElement;
+    if (!input) return;
+    const list = document.getElementById("notes-list")!;
+    const count = document.getElementById("filter-count")!;
+    const emptyMsg = document.getElementById("notes-empty")!;
+    const entries = list.querySelectorAll<HTMLElement>(".note-entry");
+    const total = entries.length;
 
-  input?.addEventListener("input", () => {
-    const query = input.value.toLowerCase().trim();
-    let visible = 0;
+    input.addEventListener("input", () => {
+      const query = input.value.toLowerCase().trim();
+      let visible = 0;
 
-    entries.forEach((entry) => {
-      const title = entry.querySelector(".note-title")?.textContent?.toLowerCase() ?? "";
-      const desc = entry.querySelector(".note-desc")?.textContent?.toLowerCase() ?? "";
+      entries.forEach((entry) => {
+        const title = entry.querySelector(".note-title")?.textContent?.toLowerCase() ?? "";
+        const desc = entry.querySelector(".note-desc")?.textContent?.toLowerCase() ?? "";
 
-      const match = !query || title.includes(query) || desc.includes(query);
-      entry.style.display = match ? "" : "none";
-      if (match) visible++;
+        const match = !query || title.includes(query) || desc.includes(query);
+        entry.style.display = match ? "" : "none";
+        if (match) visible++;
+      });
+
+      count.textContent = query
+        ? `${visible} / ${total} notes`
+        : `${total} notes`;
+
+      emptyMsg.style.display = visible === 0 ? "block" : "none";
     });
-
-    count.textContent = query
-      ? `${visible} / ${total} notes`
-      : `${total} notes`;
-
-    emptyMsg.style.display = visible === 0 ? "block" : "none";
   });
 </script>

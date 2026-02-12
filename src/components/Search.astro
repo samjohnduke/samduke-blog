@@ -433,8 +433,10 @@
     }
   });
 
-  document.getElementById("search-input")?.addEventListener("input", () => {
-    const input = document.getElementById("search-input") as HTMLInputElement;
-    search(input.value.trim());
+  document.addEventListener('astro:page-load', () => {
+    document.getElementById("search-input")?.addEventListener("input", () => {
+      const input = document.getElementById("search-input") as HTMLInputElement;
+      search(input.value.trim());
+    });
   });
 </script>
